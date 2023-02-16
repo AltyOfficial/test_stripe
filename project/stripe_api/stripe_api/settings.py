@@ -1,6 +1,4 @@
 import os
-import django_heroku
-import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -115,4 +113,3 @@ STRIPE_PUBLIC_KEY = 'pk_test_51Mc9SiGN7KTSeBJo1QzLotBdntYFmE1aXt33Mr7VBZNFYD7YyG
 STRIPE_SECRET_KEY = 'sk_test_51Mc9SiGN7KTSeBJoXaXp7A7JZJiOeqBe8hyzIZGZhFnzj1t8vKpQzKfXURYbQpUefCK8FAaCaJhesCcumseBz4kx00bE95hTVA'
 # STRIPE_WEBHOOK_SECRET = ''
 
-django_heroku.settings(locals())
