@@ -1,17 +1,18 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
-SECRET_KEY = 'django-insecure-beq%k!t=vne*&zgvdy$99zie_wuj2t(vq95cvd4-f1=rko1fs7'
+env_path = Path(BASE_DIR / 'project') / '.env'
+load_dotenv(dotenv_path=env_path)
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 
-# Application definition
+DEBUG = False
+
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -21,6 +22,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.ApiConfig',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost',
+    'http://127.0.0.1',
 ]
 
 MIDDLEWARE = [
@@ -35,7 +41,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'stripe_api.urls'
 
-TEMPLATES_DIR = BASE_DIR / 'templates'
+TEMPLATES_DIR = BASE_DIR / 'project/templates'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -55,19 +61,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'stripe_api.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'project/db.sqlite3',
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -85,9 +85,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -97,19 +94,11 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+STATIC_ROOT = BASE_DIR / 'project/static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-STRIPE_PUBLIC_KEY = 'pk_test_51Mc9SiGN7KTSeBJo1QzLotBdntYFmE1aXt33Mr7VBZNFYD7YyGXd2OipSHqfX4uZ92v6hTsSef0gTP38n8kdJ1Xk00nyhEJoyD'
-STRIPE_SECRET_KEY = 'sk_test_51Mc9SiGN7KTSeBJoXaXp7A7JZJiOeqBe8hyzIZGZhFnzj1t8vKpQzKfXURYbQpUefCK8FAaCaJhesCcumseBz4kx00bE95hTVA'
-# STRIPE_WEBHOOK_SECRET = ''
-
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')

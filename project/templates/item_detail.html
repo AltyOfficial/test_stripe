@@ -10,5 +10,24 @@
       {% csrf_token %}
       <button type="sumbit">Buy</button>
     </form>
+    <hr>
+    СЛУЧАЙНЫЙ ЗАКАЗ
+    <br>
+    {% if order.items is not None %}
+      Приобретите уже собранный заказ:
+      <div style="display: flex; align-items: center;">
+        {% for item in order.items.all %}
+          <div style="margin-right: 10px;">
+            <h2>{{ item.name }}</h2>
+            <p>{{ item.description }}</p>
+            <p>{{ item.price }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      <form action="{% url 'order_checkout' order.id %}" method="POST">
+        {% csrf_token %}
+        <button type="sumbit">Buy This Order</button>
+      </form>
+    {% endif %}
   </body>
 </html>
