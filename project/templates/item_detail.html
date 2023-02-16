@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Buy Item 1</title>
+  </head>
+  <body>
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>{{ item.price }}</p>
+    <form action="{% url 'checkout' item.id %}" method="POST">
+      {% csrf_token %}
+      <button type="sumbit">Buy</button>
+    </form>
+  </body>
+</html>
