@@ -73,8 +73,8 @@ def checkout_order(request, pk):
     checkout_session = stripe.checkout.Session.create(
         line_items=items,
         mode='payment',
-        success_url='http://127.0.0.1:8000/',
-        cancel_url='http://127.0.0.1:8000/',
+        success_url='http://127.0.0.1:8000/item/1/',
+        cancel_url='http://127.0.0.1:8000/item/1/',
     )
 
     return redirect(checkout_session.url, code=303)
