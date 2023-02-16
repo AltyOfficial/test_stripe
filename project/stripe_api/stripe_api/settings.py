@@ -1,4 +1,6 @@
 import os
+import django_heroku
+import dj_database_url
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -101,6 +103,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -111,3 +114,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STRIPE_PUBLIC_KEY = 'pk_test_51Mc9SiGN7KTSeBJo1QzLotBdntYFmE1aXt33Mr7VBZNFYD7YyGXd2OipSHqfX4uZ92v6hTsSef0gTP38n8kdJ1Xk00nyhEJoyD'
 STRIPE_SECRET_KEY = 'sk_test_51Mc9SiGN7KTSeBJoXaXp7A7JZJiOeqBe8hyzIZGZhFnzj1t8vKpQzKfXURYbQpUefCK8FAaCaJhesCcumseBz4kx00bE95hTVA'
 # STRIPE_WEBHOOK_SECRET = ''
+
+django_heroku.settings(locals())
